@@ -221,7 +221,8 @@ export default function Home() {
             >
               <img 
                 src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1200&auto=format&fit=crop" 
-                alt="Featured Collection"
+                alt="Featured Oversize Collection - The Oversize Series"
+                title="Featured Oversize Collection"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 group-hover:opacity-60"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
