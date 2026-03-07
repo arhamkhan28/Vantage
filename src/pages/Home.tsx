@@ -14,14 +14,47 @@ export default function Home() {
   const [showFilters, setShowFilters] = useState(false);
   const [visibleCount, setVisibleCount] = useState(24);
 
-  useEffect(() => {
-    fetch('/api/products')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  fetch('https://dummyjson.com/products?limit=300')
+    .then(res => res.json())
+    .then(data => {
+
+      const siteCategories = [
+        "Oversize",
+        "Graphic",
+        "Accessories",
+        "Footwear",
+        "Fragrances",
+        "Home Decor",
+        "Vintage",
+        "Logo",
+        "Basic"
+      ];
+
+      const formattedProducts = data.products.map((p, index) => ({
+
+        id: p.id,
+        name: p.title,
+        price: p.price * 80,
+        category: siteCategories[index % siteCategories.length],
+        image: p.thumbnail,
+        image2: p.images?.[1] || p.thumbnail,
+        sizes: ["S","M","L","XL"],
+        stock: 20,
+        averageRating: p.rating || 4
+
+      }));
+
+      setProducts(formattedProducts);
+      setLoading(false);
+
+    })
+    .catch(err => {
+      console.log(err);
+      setLoading(false);
+    });
+
+}, []);
 
   useEffect(() => {
     const sort = searchParams.get('sort') || 'Newest';
